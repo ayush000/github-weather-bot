@@ -9,7 +9,7 @@ const weatherURL = new URL("https://api.openweathermap.org/data/2.5/weather");
 console.log(weatherToken);
 
 weatherURL.searchParams.set("APPID", weatherToken);
-weatherURL.searchParams.set("zip", "411014,india");
+weatherURL.searchParams.set("zip", "411014,in");
 weatherURL.searchParams.set("units", "imperial");
 
 const getWeatherData = async () => {
@@ -19,11 +19,12 @@ const getWeatherData = async () => {
 };
 
 const generateWeatherMessage = weatherData => `The weather in ${weatherData.name}:
-${weatherData.weather.description}. Current temperature is ${weatherData.main.temp} with a low of
+${weatherData.weather[0].description}. Current temperature is ${weatherData.main.temp} with a low of
 temp ${weatherData.main.temp_min} and a high of ${weatherData.main.temp_max}`;
 
 const main = async () => {
   const weatherData = await getWeatherData();
+  console.log(weatherData);
   const weatherString = generateWeatherMessage(weatherData);
   bot.sendMessage(process.env.TELEGRAM_CHAT_ID, weatherString);
 };
