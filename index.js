@@ -24,7 +24,6 @@ temp ${weatherData.main.temp_min} and a high of ${weatherData.main.temp_max}`;
 
 const main = async () => {
   const weatherData = await getWeatherData();
-  console.log(weatherData);
   const weatherString = generateWeatherMessage(weatherData);
   bot.sendMessage(process.env.TELEGRAM_CHAT_ID, weatherString);
 };
